@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./apps/backend
+    container_name: django_backend
+    restart: always
+    volumes:
+      - ./apps/backend:/app  # Исправленный путь
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+  frontend:
+    build: ./apps/frontend
+    container_name: react_frontend
+    restart: always
+    volumes:
+      - ./apps/frontend:/app  # Исправленный путь
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
+
+volumes:
+  postgres_data:
