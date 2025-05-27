@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="
+    background-image: url('/static/images/destination_2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    padding: 20px;
+    color: rgb(107, 3, 3);">
+  
+  <h2>Результаты поиска по городу: "{{ query }}"</h2>
+
+  {% if results %}
+    <ul>
+      {% for dest in results %}
+        <li>
+          <a href="{% url 'destination_detail' dest.pk %}" style="color: rgb(224, 228, 229);">
+            {{ dest.name }} — Подробнее
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Ничего не найдено.</p>
+  {% endif %}
+</div>
+{% endblock %}
