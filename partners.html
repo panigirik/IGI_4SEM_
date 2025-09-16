@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Наши партнеры</title>
+    <link rel="stylesheet" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+</head>
+<body>
+<div class="container mt-5">
+
+    <!-- Партнеры -->
+    <h2 class="text-center mb-4">Наши партнеры</h2>
+    <div class="row justify-content-center">
+        {% for partner in partners %}
+            <div class="col-6 col-md-3 col-lg-2 text-center mb-4">
+                <a href="{{ partner.website }}" target="_blank">
+                    {% if partner.logo %}
+                        <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="img-fluid" style="max-height:100px; object-fit:contain;">
+                    {% else %}
+                        <div style="width:100px; height:100px; background:#eee; display:flex; align-items:center; justify-content:center;">
+                            Нет логотипа
+                        </div>
+                    {% endif %}
+                </a>
+            </div>
+        {% empty %}
+            <div class="col-12 text-center">
+                <p>Партнеров пока нет.</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Листинг программы -->
+    <h2 class="text-center my-4">Программа</h2>
+    {% if programs %}
+        <div class="list-group">
+            {% for program in programs %}
+                <div class="list-group-item">
+                    <h5>{{ program.title }}</h5>
+                    <p>{{ program.description }}</p>
+                    <small>{{ program.date }}</small>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">Программа пока пуста.</p>
+    {% endif %}
+
+    <!-- Исходный код страницы -->
+    <h2 class="text-center my-4">Исходный код страницы</h2>
+    {% if template_code %}
+        <pre style="background:#f8f9fa; padding:15px; overflow:auto;">{{ template_code|escape }}</pre>
+    {% else %}
+        <p class="text-center text-muted">Шаблон для показа исходного кода не найден.</p>
+    {% endif %}
+
+</div>
+</body>
+</html>

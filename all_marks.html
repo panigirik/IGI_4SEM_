@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <header>
+        <h2 class="mb-4">Отзывы пользователей</h2>
+        <p>На этой странице собраны <abbr title="User Generated Content">UGC</abbr> — отзывы реальных пользователей.</p>
+    </header>
+
+    {% if marks %}
+        <section aria-label="Отзывы пользователей">
+            {% for mark in marks %}
+                <article class="card mb-3" role="article">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ mark.destination.name }}</h3>
+                        <h4 class="card-subtitle mb-2 text-muted">
+                            Оценка: <strong>{{ mark.stars }}★</strong>
+                        </h4>
+
+                        <blockquote>
+                            <p>{{ mark.comment }}</p>
+                        </blockquote>
+
+                        <footer>
+                            <small class="text-muted">
+                                Пользователь: <em>{{ mark.user.username }}</em> |
+                                <time datetime="{{ mark.created_at|date:'c' }}">{{ mark.created_at|date:"d.m.Y H:i" }}</time>
+                            </small>
+                        </footer>
+                    </div>
+                </article>
+            {% endfor %}
+        </section>
+    {% else %}
+        <p><mark>Пока нет отзывов.</mark></p>
+    {% endif %}
+</div>
+{% endblock %}

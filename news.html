@@ -1,0 +1,290 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Новости</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Travello template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/news.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/news_responsive.css' %}">
+</head>
+<body>
+
+<div class="super_container">
+	
+	<!-- Header -->
+
+	<header class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="header_content d-flex flex-row align-items-center justify-content-start">
+						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
+							<div class="logo"><a href="..">Travel World</a></div>
+							<nav class="main_nav">
+								<ul class="d-flex flex-row align-items-start justify-content-start">
+									<li><a href="{% url 'support' %}">Техподдержка</a></li>
+									<li><a href="{% url 'company_news' %}">Company News</a></li>
+									<li><a href="{% url 'all_marks' %}">Отзывы</a></li>
+									<li><a href="{% url 'vacancies_page' %}">Вакансии</a></li>
+									<li><a href="..">В начало</a></li>
+									
+									<li><a href="about">О нас</a></li>
+									<li class="active"><a href="news">Новости</a></li>
+									<li><a href="/statistics">Статистика</a></li>
+									<li><a href="contact">Контакты</a></li>
+
+									{% if user.is_authenticated %}
+										<li><a href="logout">Выход</a></li>
+									{% else %}
+										<li><a href="register">Регистрация</a></li>
+										<li><a href="login">Вход</a></li>
+									{% endif %}
+								</ul>
+							</nav>
+							{% if user.is_authenticated %}
+							<div class="header_phone" style="margin-left: 20px;">Добро пожаловать, {{user.first_name}}</div>
+							{% else %}
+								<div class="header_phone ml-auto">
+									<a style="color: white; font-size:xx-large;" href="https://www.instagram.com/kmranrg/" target="_blank">
+										<i class="fa fa-instagram" aria-hidden="false"></i>
+									</a>
+								</div>
+							{% endif %}
+
+							<!-- Hamburger -->
+
+							<div class="hamburger ml-auto">
+								<i class="fa fa-bars" aria-hidden="true"></i>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header_social d-flex flex-row align-items-center justify-content-start">
+			<ul class="d-flex flex-row align-items-start justify-content-start">
+				<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+			</ul>
+		</div>
+	</header>
+
+	<!-- Menu -->
+
+	<div class="menu">
+		<div class="menu_header d-flex flex-row align-items-center justify-content-start">
+			<div class="menu_logo"><a href="..">Travel World</a></div>
+			<div class="menu_close_container ml-auto"><div class="menu_close"><div></div><div></div></div></div>
+		</div>
+		<div class="menu_content">
+			<ul>
+				<li><a href="..">В начало</a></li>
+				<li><a href="about">О нас</a></li>
+				<li class="active"><a href="news">Новости</a></li>
+				
+				<li><a href="contact">Контакты</a></li>
+
+				{% if user.is_authenticated %}
+					<li><a href="logout">Выход</a></li>
+				{% else %}
+					<li><a href="register">Регистрация</a></li>
+					<li><a href="login">Вход</a></li>
+				{% endif %}
+			</ul>
+		</div>
+		<div class="menu_social">
+
+			{% if user.is_authenticated %}
+				<div class="menu_phone ml-auto">Logged in: {{user.first_name}} {{user.last_name}}</div>
+			{% else %}
+				<div class="menu_phone ml-auto">Call us: 00-56 445 678 33</div>
+				<ul class="d-flex flex-row align-items-start justify-content-start">
+					<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+				</ul>
+			{% endif %}
+		</div>
+	</div>
+	
+	<!-- Home -->
+
+	<div class="home">
+		<div class="background_image" style="background-image:url({% static 'images/news.jpg' %})"></div>
+	</div>
+
+	<!-- Search -->
+
+
+	<!-- News -->
+
+	<div class="news">
+		<div class="container">
+			<div class="row">
+	
+				<!-- News Container -->
+				<div class="col-lg-8">
+					<div class="news_container">
+	
+						{% if articles %}
+							{% for article in articles %}
+								<!-- News Post -->
+								<div class="news_post">
+									<div class="news_post_image">
+										{% if article.urlToImage %}
+											<img src="{{ article.urlToImage }}" alt="News Image">
+										{% else %}
+											<img src="{% static 'images/default_news.jpg' %}" alt="Default Image">
+										{% endif %}
+									</div>
+									<div class="news_post_content">
+										<div class="news_post_date d-flex flex-row align-items-end justify-content-start">
+											<div>{{ article.publishedAt|date:"d" }}</div>
+											<div>{{ article.publishedAt|date:"F" }}</div>
+										</div>
+										<div class="news_post_title">
+											<a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">
+												{{ article.title }}
+											</a>
+										</div>
+										<div class="news_post_category">
+											<ul>
+												<li>
+													<a href="#">{{ article.source.name }}</a>
+												</li>
+											</ul>
+										</div>
+										<div class="news_post_text">
+											<p>{{ article.description }}</p>
+										</div>
+										<div class="news_post_link">
+											<a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">Читать больше</a>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						{% else %}
+							<p>Нет новостей для отображения.</p>
+						{% endif %}
+	
+					</div>
+	
+					<div class="pagination">
+						<ul class="d-flex flex-row align-items-start justify-content-start">
+						  {% if articles.has_previous %}
+							<li><a href="?page={{ articles.previous_page_number }}">← Назад</a></li>
+						  {% endif %}
+						  {% for num in articles.paginator.page_range %}
+							<li {% if articles.number == num %}class="active"{% endif %}>
+							  <a href="?page={{ num }}">{{ num }}</a>
+							</li>
+						  {% endfor %}
+						  {% if articles.has_next %}
+							<li><a href="?page={{ articles.next_page_number }}">Вперёд →</a></li>
+						  {% endif %}
+						</ul>
+					  </div>
+					  
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/footer_1.jpg' %}" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter">
+						<div class="newsletter_title_container text-center">
+						</div>
+						<div class="newsletter_form_container">
+							<form action="#" class="newsletter_form d-flex flex-md-row flex-column align-items-start justify-content-between" id="newsletter_form">
+								<div class="d-flex flex-md-row flex-column align-items-start justify-content-between">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row footer_contact_row">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="row">
+
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src="{% static 'images/sign.svg' %}" alt=""></div>
+								<div class="footer_contact_title">позвоните нам</div>
+								<div class="footer_contact_list">
+									<ul>
+										<li>Oффис: +375 44 5600 168</li>
+										<li>Мобильный: +375 44 5600 168</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src="{% static 'images/around.svg' %}" alt=""></div>
+								<div class="footer_contact_title">напишите нам</div>
+								<div class="footer_contact_list">
+									<ul>
+										<li>zaharvaskovskij78@gmail.com</li>
+										<li>zaharvaskovskij78@gmail.com</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</div>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'js/news.js' %}"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+
+</body>
+
+</html>

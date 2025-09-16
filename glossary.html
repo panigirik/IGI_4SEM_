@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}<mark>Словарь терминов</mark>{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4 text-center"><mark>Словарь терминов и понятий</mark></h1>
+    <div class="accordion" id="glossaryAccordion">
+        {% for item in terms %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
+                   <br>{{ item.term }}</br>
+                </button>
+            </h2>
+            <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#glossaryAccordion">
+                <div class="accordion-body">
+                    <mark>{{ item.definition }}</mark>
+                    <p class="text-muted small mt-2">Добавлено: <mark>{{ item.created_at|date:"d.m.Y" }}</mark></p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+            <p><mark>Терминов пока нет.</mark></p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

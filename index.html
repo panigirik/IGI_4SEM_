@@ -1,0 +1,458 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Travello</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Travello template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+</head>
+<body>
+
+<div class="super_container">
+	
+{% load static %}
+
+<header class="header bg-transparent py-2">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between mb-2 flex-wrap">
+            <div class="logo d-flex align-items-center gap-2">
+                <a href="{% url 'index' %}" class="d-flex align-items-center text-decoration-none">
+                    <img src="{% static 'images/TravellWorld.png' %}" alt="Logo" style="height: 40px;">
+                    <span class="text-white fw-bold fs-5">Travel World</span>
+                </a>
+            </div>
+
+            {% if user.is_authenticated %}
+            <div class="header_user text-white">Добро пожаловать, {{ user.first_name }}</div>
+            {% endif %}
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
+            <nav class="main_nav flex-grow-1">
+                <ul class="d-flex flex-wrap align-items-center gap-2 mb-0 list-unstyled">
+                    <li><a href="{% url 'cart' %}" class="text-white">Корзина</a></li>
+                    <li><a href="{% url 'company_news' %}" class="text-white">Новости компании</a></li>
+					<li><a href="{% url 'partners' %}" class="text-white">Партнеры</a></li>
+					<li><a href="{% url 'glossary' %}">FAQ</a></li>
+                    <li><a href="{% url 'support' %}" class="text-white">Техподдержка</a></li>
+                    <li><a href="{% url 'all_marks' %}" class="text-white">Отзывы</a></li>
+                    <li><a href="{% url 'privacy_policy' %}" class="text-white">Конфиденциальность</a></li>
+                    <li><a href="{% url 'vacancies_page' %}" class="text-white">Вакансии</a></li>
+					<li><a href="{% url 'contact' %}">Контакты</a></li>
+					<li><a href="{% url 'promos_list' %}" class="text-white">Промокоды</a></li>
+                    <li><a href="{% url 'contact' %}" class="text-white">Контакты</a></li>
+                    <li><a href="{% url 'about' %}" class="text-white">О нас</a></li>
+                    <li><a href="{% url 'news' %}" class="text-white">Новости</a></li>
+                    <li><a href="/statistics" class="text-white">Статистика</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}" class="text-white">Выход</a></li>
+                    {% else %}
+                        <li><a href="{% url 'register' %}" class="text-white">Регистрация</a></li>
+                        <li><a href="{% url 'login' %}" class="text-white">Вход</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+            <!-- Социальные сети -->
+            <div class="header_social d-flex gap-2 mt-2 mt-md-0">
+                <a href="#"><i class="fa fa-pinterest text-white"></i></a>
+                <a href="#"><i class="fa fa-facebook text-white"></i></a>
+                <a href="#"><i class="fa fa-twitter text-white"></i></a>
+                <a href="#"><i class="fa fa-dribbble text-white"></i></a>
+                <a href="#"><i class="fa fa-behance text-white"></i></a>
+                <a href="#"><i class="fa fa-linkedin text-white"></i></a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+	<!-- Menu -->
+
+	<div class="menu">
+		<div class="menu_header d-flex flex-row align-items-center justify-content-start">
+			<div class="menu_logo"><a href="">Travel World</a></div>
+			<div class="menu_close_container ml-auto"><div class="menu_close"><div></div><div></div></div></div>
+		</div>
+		<div class="menu_content">
+			<ul>
+				<li class="active"><a href="">В начало</a></li>
+				<li><a href="about">О нас</a></li>
+				<li><a href="news">Новости</a></li>
+				<li class="active"><a href="contact">Контакты</a></li>
+				{% if user.is_authenticated %}
+					<li><a href="accounts/logout">Выход</a></li>
+				{% else %}
+					<li><a href="accounts/register">Регистрация</a></li>
+					<li><a href="accounts/login">Вход</a></li>
+				{% endif %}
+			</ul>
+		</div>
+		<div class="menu_social">
+			{% if user.is_authenticated %}
+				<div class="menu_phone ml-auto">Logged in: {{user.first_name}} {{user.last_name}}</div>
+			{% else %}
+				<div class="menu_phone ml-auto">позвоните нам: +375 44 5600 168</div>
+				<ul class="d-flex flex-row align-items-start justify-content-start">
+					<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+				</ul>
+			{% endif %}
+		</div>
+	</div>
+	
+	<!-- Home -->
+
+	<div class="home">
+		
+		<!-- Home Slider -->
+		<div class="home_slider_container">
+			<div class="owl-carousel owl-theme home_slider">
+				
+				<!-- Slide -->
+				<div class="owl-item">
+					<div class="background_image" style="background-image:url({% static 'images/home_slider.jpg' %})"></div>
+					<div class="home_slider_content_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Slide -->
+				<div class="owl-item">
+					<div class="background_image" style="background-image:url({% static 'images/home_slider.jpg' %})"></div>
+					<div class="home_slider_content_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Slide -->
+				<div class="owl-item">
+					<div class="background_image" style="background-image:url({% static 'images/home_slider.jpg' %})"></div>
+					<div class="home_slider_content_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			{% for dest in destinations %}
+			<div class="card" style="width: 18rem; display:inline-block; margin: 10px;">
+			  <img src="{{ dest.img.url }}" class="card-img-top" alt="{{ dest.name }}">
+			  <div class="card-body">
+				<h5 class="card-title">{{ dest.name }}</h5>
+				<p class="card-text">{{ dest.desc }}</p>
+				<p><strong>Цена:</strong> {{ dest.price }} ₽</p>
+				<a href="{% url 'add_to_cart' dest.id %}" class="btn btn-success">Добавить в корзину</a>
+			  </div>
+			</div>
+			{% endfor %}
+									
+		</div>
+	</div>
+
+	<!-- Search -->
+
+	<div class="home_search">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="home_search_container">
+						<div class="home_search_title">Найдите свое путешествие</div>
+						<div class="home_search_content">
+							<form action="{% url 'search_destinations' %}" method="get" class="home_search_form" id="home_search_form">
+								<div class="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">
+									<input type="text" name="city" class="search_input search_input_1" placeholder="Город" required>
+									<!-- остальные поля можно убрать или оставить -->
+									<button class="home_search_button">найти</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	<div class="intro my-5 position-relative">
+		<!-- Фон блока -->
+		<div class="intro_background" style="background-image:url({% static 'images/intro.png' %});"></div>
+		<div class="container position-relative">
+			<div class="row justify-content-center mb-4">
+				<div class="col-lg-8 text-center position-relative">
+					<!-- Центральный баннер -->
+					<img src="{% static 'images/pexels-vitalina-12587136.jpg' %}" 
+						 alt="Реклама компании" 
+						 class="img-fluid rounded shadow mb-3 central-banner">
+	
+					<!-- Левый баннер -->
+					<img src="{% static 'images/pexels-habi-dompil-1539296-2964163.jpg' %}" 
+						 alt="Левый баннер" 
+						 class="img-fluid rounded shadow side-banner side-left">
+	
+					<!-- Правый баннер -->
+					<img src="{% static 'images/pexels-alexazabache-3290068.jpg' %}" 
+						 alt="Правый баннер" 
+						 class="img-fluid rounded shadow side-banner side-right">
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	
+
+
+
+	<!-- Destinations -->
+
+	<!-- Destinations -->
+		<div class="destinations" id="destinations">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_title"><h2>Доступные предложения</h2></div>
+				</div>
+			</div>
+
+			<div class="row destinations_row">
+				<div class="col">
+					<div class="destinations_container item_grid">
+						<!-- Цикл по турам -->
+						{% for dest in dests %}
+						<div class="destination item">
+							<div class="destination_image">
+								<img src="{{ dest.img.url }}" alt="">
+							</div>
+							<div class="destination_content">
+								<div class="destination_title">
+									<a href="{% url 'destination_detail' dest.id %}">{{ dest.name }}</a>
+								</div>								  
+								<div class="destination_subtitle"><p>{{ dest.desc }}</p></div>
+								<div class="destination_price">От ${{ dest.price }}</div>
+								<a href="{% url 'add_to_cart' dest.id %}" class="btn btn-success mt-2">Добавить в корзину</a>
+							</div>							
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+
+			<!-- Единая форма отзыва -->
+			<div class="row mt-4 mb-5">
+				<div class="col-md-4 offset-md-4">
+					<div class="card">
+						<div class="card-body p-3">
+							<h5 class="card-title text-center">Оставить отзыв</h5>
+							<form method="GET" action="{% url 'leave_mark_choose' %}">
+								<div class="form-group mb-3">
+									<label for="destination" class="form-label">Выберите тур:</label>
+									<select name="destination_id" id="destination" class="form-control" required>
+										<option value="">-- Выберите тур --</option>
+										{% for dest in dests %}
+											<option value="{{ dest.id }}">{{ dest.name }}</option>
+										{% endfor %}
+									</select>
+								</div>
+								<button type="submit" class="btn btn-primary btn-block">Перейти к форме отзыва</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<!-- Testimonials -->
+
+	<!-- News -->
+	<div class="news" id="news">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-8">
+					<div class="news_container">
+
+						{% for dest in destinations %}
+						<!-- News Post -->
+						<div class="news_post d-flex flex-md-row flex-column align-items-start justify-content-start">
+							<div class="news_post_image">
+								<img src="{{ dest.image.url }}" alt="{{ dest.name }}">
+							</div>
+							<div class="news_post_content">
+								<div class="news_post_date d-flex flex-row align-items-end justify-content-start">
+									<div>{{ dest.created_at|date:"d" }}</div>
+									<div>{{ dest.created_at|date:"F" }}</div>
+								</div>
+								<div class="news_post_title">
+									<a href="#">{{ dest.name }}</a>
+								</div>
+								<div class="news_post_category">
+									<ul>
+										<li><a href="#">{{ dest.category }}</a></li>
+									</ul>
+								</div>
+								<div class="news_post_text">
+									<p>{{ dest.description|truncatewords:20 }}</p>
+								</div>
+
+
+							</div>
+						</div>
+						{% endfor %}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	
+
+
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/footer_1.jpg' %}" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter">
+						<div class="newsletter_title_container text-center">
+						</div>
+						<div class="newsletter_form_container">
+							<form action="#" class="newsletter_form d-flex flex-md-row flex-column align-items-start justify-content-between" id="newsletter_form">
+								<div class="d-flex flex-md-row flex-column align-items-start justify-content-between">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row footer_contact_row">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="row">
+
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src="{% static 'images/sign.svg' %}" alt=""></div>
+								<div class="footer_contact_title">позвоните нам</div>
+								<div class="footer_contact_list">
+									<ul>
+										<li>Оффис: +375 44 5600 168</li>
+										<li>Директор: +375 44 5600 168</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src="{% static 'images/around.svg' %}" alt=""></div>
+								<div class="footer_contact_title">Отправьте сообщение</div>
+								<div class="footer_contact_list">
+									<ul>
+										<li>zaharvaskovskij78@gmail.com</li>
+										<li>zaharvaskovskij78@gmail.com</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</div>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+
+</body>
+
+<style>
+
+.central-banner {
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+}
+
+/* Общий стиль боковых */
+.side-banner {
+    position: absolute;
+    top: 20%; /* смещение по вертикали */
+    width: 40%; /* сделаем немного меньше центрального */
+    opacity: 0.9; /* лёгкая прозрачность */
+    z-index: 1; /* под центральным */
+}
+
+/* Левый */
+.side-left {
+    left: -20%; /* выступает за контейнер */
+}
+
+/* Правый */
+.side-right {
+    right: -20%;
+}
+
+</style>
+
+</html>
+
