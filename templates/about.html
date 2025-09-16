@@ -1,0 +1,417 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>О нас</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Travello template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/about.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/about_responsive.css' %}">
+</head>
+<body>
+
+<div class="super_container">
+	
+	<!-- Header -->
+
+	<header class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="header_content d-flex flex-row align-items-center justify-content-start">
+						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
+							<div class="logo"><a href="..">Travel World</a></div>
+							<nav class="main_nav">
+								<ul class="d-flex flex-row align-items-start justify-content-start">
+									<li><a href="..">В начало</a></li>
+									<li class="active"><a href="about">О нас</a></li>
+									<li><a href="news">Новости</a></li>
+									<li><a href="contact">Контакты</a></li>
+
+									{% if user.is_authenticated %}
+										<li><a href="logout">Выйти</a></li>
+									{% else %}
+										<li><a href="register">Регистрация</a></li>
+										<li><a href="login">Вход</a></li>
+									{% endif %}
+								</ul>
+							</nav>
+							{% if user.is_authenticated %}
+							<div class="header_phone" style="margin-left: 20px;">Добро пожаловать, {{user.first_name}}</div>
+							{% else %}
+								<div class="header_phone ml-auto">
+									<a style="color: white; font-size:xx-large;" href="https://www.instagram.com/kmranrg/" target="_blank">
+										<i class="fa fa-instagram" aria-hidden="false"></i>
+									</a>
+								</div>
+							{% endif %}
+
+							<!-- Hamburger -->
+
+							<div class="hamburger ml-auto">
+								<i class="fa fa-bars" aria-hidden="true"></i>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header_social d-flex flex-row align-items-center justify-content-start">
+			<ul class="d-flex flex-row align-items-start justify-content-start">
+				<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+			</ul>
+		</div>
+	</header>
+
+	<!-- Menu -->
+
+	<div class="menu">
+		<div class="menu_header d-flex flex-row align-items-center justify-content-start">
+			<div class="menu_logo"><a href="..">Travel World</a></div>
+			<div class="menu_close_container ml-auto"><div class="menu_close"><div></div><div></div></div></div>
+		</div>
+		<div class="menu_content">
+			<ul>
+				<li><a href="..">В начало</a></li>
+				<li class="active"><a href="about">О нас</a></li>
+				<li><a href="news">Новости</a></li>
+				<li><a href="contact">Контакты</a></li>
+
+				{% if user.is_authenticated %}
+					<li><a href="logout">Выход</a></li>
+				{% else %}
+					<li><a href="register">Регистрация</a></li>
+					<li><a href="login">Вход</a></li>
+				{% endif %}
+			</ul>
+		</div>
+		<div class="menu_social">
+			{% if user.is_authenticated %}
+				<div class="menu_phone ml-auto">Logged in: {{user.first_name}} {{user.last_name}}</div>
+			{% else %}
+				<div class="menu_phone ml-auto">ПОзвоните нам: +375 44 5600 168</div>
+				<ul class="d-flex flex-row align-items-start justify-content-start">
+					<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+				</ul>
+			{% endif %}
+		</div>
+	</div>
+	
+	<!-- Home -->
+
+	<div class="home">
+		<div class="background_image" style="background-image:url({% static 'images/about.jpg' %})"></div>
+	</div>
+
+	<!-- Search -->
+
+
+	<!-- About -->
+
+	<div class="about">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_subtitle">захватывающие места</div>
+					<div class="section_title"><h2>Пару слов о нас</h2></div>
+				</div>
+			</div>
+			<div class="row about_row">
+				<div class="col-lg-6">
+					<div class="about_content">
+						<div class="text_highlight">Стремитесь к гармонии в содержании: вниманию к деталям, стилю и структуре — всё должно быть сбалансировано. Жизнь полна движения. Важно сохранять равновесие между напряжённостью и размеренностью. Любой труд начинается с усердия и стремления к совершенству.</div>
+						<div class="about_text">
+							<p>Стремитесь к целостности: сочетайте содержание, структуру, стиль и точность. Жизнь полна движения. Важно сохранять баланс между ритмом и упорядоченностью.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="about_image"><img src="{% static 'images/about_1.jpg' %}" alt=""></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Milestones -->
+
+	<div class="milestones">
+		<div class="container">
+			<div class="row">
+
+				<!-- Milestone -->
+				<div class="col-lg-3 milestone_col">
+					<div class="milestone text-center">
+						<div class="milestone_icon"><img src="{% static 'images/island.svg' %}" alt=""></div>
+						<div class="milestone_counter" data-end-value="213">0</div>
+						<div class="milestone_text">Студентов</div>
+					</div>
+				</div>
+
+				<!-- Milestone -->
+				<div class="col-lg-3 milestone_col">
+					<div class="milestone text-center">
+						<div class="milestone_icon"><img src="{% static 'images/camera.svg' %}" alt=""></div>
+						<div class="milestone_counter" data-end-value="11923">0</div>
+						<div class="milestone_text">Учителей</div>
+					</div>
+				</div>
+
+				<!-- Milestone -->
+				<div class="col-lg-3 milestone_col">
+					<div class="milestone text-center">
+						<div class="milestone_icon"><img src="{% static 'images/boat.svg' %}" alt=""></div>
+						<div class="milestone_counter" data-end-value="15">0</div>
+						<div class="milestone_text">Стран</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Why Choose Us -->
+
+	<div class="why">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/why.jpg' %}" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_subtitle">захватывающие места</div>
+					<div class="section_title"><h2>Почему стоит выбрать именно нас</h2></div>
+				</div>
+			</div>
+			<div class="row why_row">
+				
+				<!-- Why item -->
+				<div class="col-lg-4 why_col">
+					<div class="why_item">
+						<div class="why_image">
+							<img src="{% static 'images/why_1.jpg' %}" alt="">
+							<div class="why_icon d-flex flex-column align-items-center justify-content-center">
+								<img src="{% static 'images/why_1.svg' %}" alt="">
+							</div>
+						</div>
+						<div class="why_content text-center">
+							<div class="why_title">Быстрые сервисы</div>
+							<div class="why_text">
+								<p>Стремитесь к содержательности, аккуратности, стилю и структуре — всё должно быть сбалансировано.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Why item -->
+				<div class="col-lg-4 why_col">
+					<div class="why_item">
+						<div class="why_image">
+							<img src="{% static 'images/why_2.jpg' %}" alt="">
+							<div class="why_icon d-flex flex-column align-items-center justify-content-center">
+								<img src="{% static 'images/why_2.svg' %}" alt="">
+							</div>
+						</div>
+						<div class="why_content text-center">
+							<div class="why_title">Сплоченная команда</div>
+							<div class="why_text">
+								<p>Слушайте клиента так, как будто он уже в пути. Именно вы задаёте направление его впечатлений.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Why item -->
+				<div class="col-lg-4 why_col">
+					<div class="why_item">
+						<div class="why_image">
+							<img src="{% static 'images/why_3.jpg' %}" alt="">
+							<div class="why_icon d-flex flex-column align-items-center justify-content-center">
+								<img src="{% static 'images/why_3.svg' %}" alt="">
+							</div>
+						</div>
+						<div class="why_content text-center">
+							<div class="why_title">Лучшие Предложения</div>
+							<div class="why_text">
+								<p>Путешествие начинается не в аэропорту, а в момент, когда вы улыбнулись клиенту.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Team -->
+
+	<div class="team">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_subtitle">захватывающие места</div>
+					<div class="section_title"><h2>
+                        Познакомьтесь с командой</h2></div>
+				</div>
+			</div>
+			<div class="row team_row">
+				
+				<!-- Team Item -->
+				<div class="col-xl-3 col-md-6 team_col">
+					<div class="team_item d-flex flex-column align-items-center justify-content-start text-center">
+						<div class="team_image"><img src="{% static 'images/team_1.jpg' %}" alt=""></div>
+						<div class="team_content">
+							<div class="team_title"><a href="#">Маргарита Смирнова</a></div>
+							<div class="team_text">
+								<p>Планируйте с точностью, предлагайте с душой — каждый маршрут должен быть как маленькое произведение искусства. Путешествие начинается с доверия.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Team Item -->
+				<div class="col-xl-3 col-md-6 team_col">
+					<div class="team_item d-flex flex-column align-items-center justify-content-start text-center">
+						<div class="team_image"><img src="{% static 'images/team_2.jpg' %}" alt=""></div>
+						<div class="team_content">
+							<div class="team_title"><a href="#">Дмитрий Васильев</a></div>
+							<div class="team_text">
+								<p>Знания, внимание к деталям и любовь к дороге — вот то, что делает путешествие по-настоящему незабываемым.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Team Item -->
+				<div class="col-xl-3 col-md-6 team_col">
+					<div class="team_item d-flex flex-column align-items-center justify-content-start text-center">
+						<div class="team_image"><img src="{% static 'images/team_3.jpg' %}" alt=""></div>
+						<div class="team_content">
+							<div class="team_title"><a href="#">Михаил Яковлев</a></div>
+							<div class="team_text">
+								<p>Будьте проводником в мир впечатлений, а не просто продавцом билетов. От вашего подхода зависит первое ощущение от страны.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Team Item -->
+				<div class="col-xl-3 col-md-6 team_col">
+					<div class="team_item d-flex flex-column align-items-center justify-content-start text-center">
+						<div class="team_image"><img src="{% static 'images/team_4.jpg' %}" alt=""></div>
+						<div class="team_content">
+							<div class="team_title"><a href="#"> Никита Соколов</a></div>
+							<div class="team_text">
+								<p>Каждое путешествие — это история. Сделайте так, чтобы она начиналась с хорошего рассказчика.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/footer_1.jpg' %}" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter">
+						<div class="newsletter_title_container text-center">
+						</div>
+						<div class="newsletter_form_container">
+							<form action="#" class="newsletter_form d-flex flex-md-row flex-column align-items-start justify-content-between" id="newsletter_form">
+								<div class="d-flex flex-md-row flex-column align-items-start justify-content-between">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row footer_contact_row">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="row">
+
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src="{% static 'images/sign.svg' %}" alt=""></div>
+								<div class="footer_contact_title">позвоните нам</div>
+								<div class="footer_contact_list">
+									<ul>
+										<li>Office Landline: +375 44 5600 168</li>
+										<li>Mobile: +375 44 5600 168</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src="{% static 'images/around.svg' %}" alt=""></div>
+								<div class="footer_contact_title">напишите нам</div>
+								<div class="footer_contact_list">
+									<ul>
+										<li>zaharvaskovskij78@gmail.com</li>
+										<li>zaharvaskovskij78@gmail.com</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</footer>
+</div>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/TweenMax.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/TimelineMax.min.js' %}"></script>
+<script src="{% static 'plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/animation.gsap.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'js/about.js' %}"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+
+</body>
+
+</html>

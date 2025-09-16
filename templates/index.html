@@ -1,0 +1,439 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Travello</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Travello template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+</head>
+<body>
+
+<div class="super_container">
+	
+	<!-- Header -->
+<!-- Add "Статистика" button to header -->
+<header class="header">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="header_content d-flex flex-row align-items-center justify-content-start">
+					<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
+						<div class="logo"><a href="">Travel World</a></div>
+						<nav class="main_nav">
+							<ul class="d-flex flex-row align-items-start justify-content-start">
+								<li class="active"><a href="">В начало</a></li>
+								<li><a href="accounts/contact">Контакты</a></li>
+								<li class="active"><a href="about">О нас</a></li>
+								<li><a href="accounts/news">новости</a></li>
+								<li><a href="/statistics">Статистика</a></li>
+								{% if user.is_authenticated %}
+									<li><a href="accounts/logout">Выход</a></li>
+								{% else %}
+									<li><a href="accounts/register">Регистрация</a></li>
+									<li><a href="accounts/login">Вход</a></li>
+								{% endif %}
+							</ul>
+						</nav>
+						{% if user.is_authenticated %}
+						<div class="header_phone" style="margin-left: 20px;">Добро пожаловать, {{user.first_name}}</div>
+						{% else %}
+						{% endif %}
+						<div class="hamburger ml-auto">
+							<i class="fa fa-bars" aria-hidden="true"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="header_social d-flex flex-row align-items-center justify-content-start">
+		<ul class="d-flex flex-row align-items-start justify-content-start">
+			<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+			<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+			<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+			<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+			<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+			<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+		</ul>
+	</div>
+</header>
+
+	<!-- Menu -->
+
+	<div class="menu">
+		<div class="menu_header d-flex flex-row align-items-center justify-content-start">
+			<div class="menu_logo"><a href="">Travel World</a></div>
+			<div class="menu_close_container ml-auto"><div class="menu_close"><div></div><div></div></div></div>
+		</div>
+		<div class="menu_content">
+			<ul>
+				<li class="active"><a href="">В начало</a></li>
+				<li><a href="about">О нас</a></li>
+				<li><a href="news">Новости</a></li>
+				<li class="active"><a href="contact">Контакты</a></li>
+				{% if user.is_authenticated %}
+					<li><a href="accounts/logout">Выход</a></li>
+				{% else %}
+					<li><a href="accounts/register">Регистрация</a></li>
+					<li><a href="accounts/login">Вход</a></li>
+				{% endif %}
+			</ul>
+		</div>
+		<div class="menu_social">
+			{% if user.is_authenticated %}
+				<div class="menu_phone ml-auto">Logged in: {{user.first_name}} {{user.last_name}}</div>
+			{% else %}
+				<div class="menu_phone ml-auto">позвоните нам: +375 44 5600 168</div>
+				<ul class="d-flex flex-row align-items-start justify-content-start">
+					<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+				</ul>
+			{% endif %}
+		</div>
+	</div>
+	
+	<!-- Home -->
+
+	<div class="home">
+		
+		<!-- Home Slider -->
+		<div class="home_slider_container">
+			<div class="owl-carousel owl-theme home_slider">
+				
+				<!-- Slide -->
+				<div class="owl-item">
+					<div class="background_image" style="background-image:url({% static 'images/home_slider.jpg' %})"></div>
+					<div class="home_slider_content_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Slide -->
+				<div class="owl-item">
+					<div class="background_image" style="background-image:url({% static 'images/home_slider.jpg' %})"></div>
+					<div class="home_slider_content_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Slide -->
+				<div class="owl-item">
+					<div class="background_image" style="background-image:url({% static 'images/home_slider.jpg' %})"></div>
+					<div class="home_slider_content_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="home_page_nav">
+				<ul class="d-flex flex-column align-items-end justify-content-end">
+					<li><a href="#" data-scroll-to="#destinations">Предложения<span></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- Search -->
+
+	<div class="home_search">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="home_search_container">
+						<div class="home_search_title">Найдите свое путешествие</div>
+						<div class="home_search_content">
+							<form action="{% url 'search_destinations' %}" method="get" class="home_search_form" id="home_search_form">
+								<div class="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">
+									<input type="text" name="city" class="search_input search_input_1" placeholder="Город" required>
+									<!-- остальные поля можно убрать или оставить -->
+									<button class="home_search_button">найти</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	<!-- Intro -->
+
+	<div class="intro">
+		<div class="intro_background" style="background-image:url({% static 'images/intro.png' %})"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="intro_container">
+						<div class="row">
+
+							<!-- Intro Item -->
+							<div class="col-lg-4 intro_col">
+								<div class="intro_item d-flex flex-row align-items-end justify-content-start">
+									<div class="intro_icon"><img src="{% static 'images/beach.svg' %}" alt=""></div>
+									<div class="intro_content">
+										<div class="intro_title">Лучшие туры</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Intro Item -->
+							<div class="col-lg-4 intro_col">
+								<div class="intro_item d-flex flex-row align-items-end justify-content-start">
+									<div class="intro_icon"><img src="{% static 'images/wallet.svg' %}" alt=""></div>
+									<div class="intro_content">
+										<div class="intro_title">Лучшие цены</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Intro Item -->
+							<div class="col-lg-4 intro_col">
+								<div class="intro_item d-flex flex-row align-items-end justify-content-start">
+									<div class="intro_icon"><img src="{% static 'images/suitcase.svg' %}" alt=""></div>
+									<div class="intro_content">
+										<div class="intro_title">Лучшие сервисы</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>		
+			</div>
+		</div>
+	</div>
+
+	<!-- Destinations -->
+
+	<div class="destinations" id="destinations">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_title"><h2>Доступные предложения</h2></div>
+				</div>
+			</div>
+			<div class="row destinations_row">
+				<div class="col">
+					<div class="destinations_container item_grid">
+
+						<!-- Destination -->
+						
+						{% for dest in dests %}
+						<div class="destination item">
+							<div class="destination_image">
+								<img src="{{dest.img.url}}" alt="">
+								{% if dest.offer %}
+								{% endif %}
+							</div>
+							<div class="destination_content">
+								<div class="destination_title">
+									<a href="{% url 'destination_detail' dest.id %}">{{ dest.name }}</a>
+								  </div>								  
+								<div class="destination_subtitle"><p>{{dest.desc}}</p></div>
+								<div class="destination_price">От ${{dest.price}}</div>
+							</div>
+						</div>
+
+						{% endfor %}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Testimonials -->
+
+
+	<!-- News -->
+
+	<div class="news" id="news">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-8">
+					<div class="news_container">
+						
+						<!-- News Post -->
+						<div class="news_post d-flex flex-md-row flex-column align-items-start justify-content-start">
+							<div class="news_post_image"><img src="{% static 'images/news_1.jpg' %}" alt=""></div>
+							<div class="news_post_content">
+								<div class="news_post_date d-flex flex-row align-items-end justify-content-start">
+									<div>02</div>
+									<div>june</div>
+								</div>
+								<div class="news_post_title"><a href="#">
+									Лучшие советы, как путешествовать легко</a></div>
+								<div class="news_post_category">
+									<ul>
+										<li><a href="#"></a></li>
+									</ul>
+								</div>
+								<div class="news_post_text">
+									<p></p>
+								</div>
+							</div>
+						</div>
+
+						<!-- News Post -->
+						<div class="news_post d-flex flex-md-row flex-column align-items-start justify-content-start">
+							<div class="news_post_image"><img src="{% static 'images/news_2.jpg' %}" alt=""></div>
+							<div class="news_post_content">
+								<div class="news_post_date d-flex flex-row align-items-end justify-content-start">
+									<div>01</div>
+									<div>june</div>
+								</div>
+								<div class="news_post_title"><a href="#">Лучшие советы, как путешествовать легко</a></div>
+								<div class="news_post_category">
+									<ul>
+										<li><a href="#">lifestyle & travel</a></li>
+									</ul>
+								</div>
+								<div class="news_post_text">
+									<p>Мгновения насыщены смыслом и направлены к росту.</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- News Post -->
+						<div class="news_post d-flex flex-md-row flex-column align-items-start justify-content-start">
+							<div class="news_post_image"><img src="{% static 'images/news_3.jpg' %}" alt=""></div>
+							<div class="news_post_content">
+								<div class="news_post_date d-flex flex-row align-items-end justify-content-start">
+									<div>29</div>
+									<div>may</div>
+								</div>
+								<div class="news_post_title"><a href="#">Лучшие советы, как путешествовать легко</a></div>
+								<div class="news_post_category">
+									<ul>
+										<li><a href="#">lifestyle & travel</a></li>
+									</ul>
+								</div>
+								<div class="news_post_text">
+									<p>Живите с силой и наполненностью.</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/footer_1.jpg' %}" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter">
+						<div class="newsletter_title_container text-center">
+						</div>
+						<div class="newsletter_form_container">
+							<form action="#" class="newsletter_form d-flex flex-md-row flex-column align-items-start justify-content-between" id="newsletter_form">
+								<div class="d-flex flex-md-row flex-column align-items-start justify-content-between">
+								</div>
+								<div><button style="background-color: brown;" class="newsletter_button">подписка</button></div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row footer_contact_row">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="row">
+
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src="{% static 'images/sign.svg' %}" alt=""></div>
+								<div class="footer_contact_title">позвоните нам</div>
+								<div class="footer_contact_list">
+									<ul>
+										<li>Оффис: +375 44 5600 168</li>
+										<li>Директор: +375 44 5600 168</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- Footer Contact Item -->
+						<div class="col-xl-4 footer_contact_col">
+							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
+								<div class="footer_contact_icon"><img src="{% static 'images/around.svg' %}" alt=""></div>
+								<div class="footer_contact_title">Отправьте сообщение</div>
+								<div class="footer_contact_list">
+									<ul>
+										<li>zaharvaskovskij78@gmail.com</li>
+										<li>zaharvaskovskij78@gmail.com</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</div>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+
+</body>
+
+</html>

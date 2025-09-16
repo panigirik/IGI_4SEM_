@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ dest.name }} – Информация о туре</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+            background-image: url('/media/pics/destination_9.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #7b4f4f;
+        }
+
+        h2, h3 {
+            color: #0d2878;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        p, label {
+            text-shadow: 1px 1px 1px #000;
+        }
+
+        .info-block {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(131, 30, 30, 0.1);
+            border: 1px solid rgba(74, 14, 14, 0.3);
+            border-radius: 10px;
+        }
+
+        form {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input, select, button {
+            margin-top: 5px;
+            padding: 8px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input, select {
+            background-color: #20b8dd;
+            color: #2c3e50;
+        }
+
+        button {
+            background-color: #3498db;
+            color: rgb(42, 18, 18);
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        small {
+            color: #dd6565;
+        }
+
+        .success-message {
+            color: #2ecc71;
+            margin-top: 15px;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px #000;
+        }
+    </style>
+</head>
+<body>
+
+<h2>{{ dest.name }}</h2>
+<p>{{ dest.desc }}</p>
+<p><strong>Стоимость за неделю пребывания:</strong> {{ dest.price }} EUR</p>
+
+<!-- Блок погоды -->
+{% if weather %}
+    <div class="info-block">
+        <h3>Погода в {{ weather.location.name }}:</h3>
+        <p>Температура: {{ weather.current.temp_c }}°C</p>
+        <p>Описание: {{ weather.current.condition.text }}</p>
+        <p>Влажность: {{ weather.current.humidity }}%</p>
+        <p>Ветер: {{ weather.current.wind_kph }} км/ч</p>
+    </div>
+{% else %}
+    <p>Информация о погоде временно недоступна.</p>
+{% endif %}
+
+<!-- Блок курса валют -->
+{% if exchange_rate %}
+    <div class="info-block">
+        <h3>Курс валюты:</h3>
+        <p>1 EUR = {{ exchange_rate }} USD</p>
+    </div>
+{% endif %}
+
+<!-- Форма бронирования -->
+<form method="post">
+    {% csrf_token %}
+
+    <label for="hotels">Choose hotels:</label>
+    <select name="hotels[]" id="hotels" multiple required>
+        {% for hotel in dest.hotel_set.all %}
+            <option value="{{ hotel.id }}">{{ hotel.name }} - {{ hotel.stars }}★</option>
+        {% endfor %}
+    </select>
+
+    <label for="duration">Время пребывания:</label>
+    <select name="duration" id="duration" required>
+        <option value="1">1 неделя</option>
+        <option value="2">2 недели</option>
+        <option value="4">4 недели</option>
+    </select>
+
+    <label for="start_date">Дата отправки:</label>
+    <input type="date" name="start_date" id="start_date" required>
+
+    <label for="promo_code">Промокод (если есть):</label>
+    <input type="text" name="promo_code" id="promo_code" maxlength="50">
+
+    <button type="submit">Приобрести путевку</button>
+</form>
+
+<!-- Сообщение об успехе -->
+{% if message %}
+    <p class="success-message">{{ message }}</p>
+{% endif %}
+
+</body>
+</html>

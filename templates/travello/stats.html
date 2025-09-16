@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="
+    background-image: url('/media/pics/destination_7.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    padding: 40px;
+    color: #1a1a1a;">
+    
+    <div class="container mt-5">
+        <h1>Статистика по транзакциям</h1>
+        <img src="{% url 'stats_image' %}" alt="График транзакций" />
+    </div>
+</div>
+{% endblock %}
